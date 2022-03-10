@@ -29,13 +29,20 @@ export class App extends Component {
 
     handleOnSubmit = (event) => {
         event.preventDefault();
+        if (this.state.newTodo === "") {
+            alert('Cannot submit an empty field.')
+        } 
+        else if (this.state.todoArray.some(duplicate => duplicate.todo === this.state.newTodo)) {
+            alert('No duplicates.')
+        }
+        else {
         let newArray = [...this.state.todoArray, { id: uuidv4(), todo: this.state.newTodo },
         ]
         this.setState({
             todoArray: newArray,
             newTodo: "",
         });
-        
+    }
     };
 
     showTodoArray = () => {
